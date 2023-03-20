@@ -70,6 +70,27 @@ const partyController = {
         } catch (error) {
             console.log(error)
         }
+    },
+    delete: async(req, res) => {
+      
+        const id = req.params.id
+        try {
+            
+            const party = await PartyModel.findById(id)
+
+            if(!party) {
+            res.status(401).json({msg: "Festa nao encontrada!"})
+            return
+            }
+
+            const response = await PartyModel.findByIdAndDelete(id)
+
+
+            res.status(200).json({response, msg: "Festa deletada com sucesso!"})
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
