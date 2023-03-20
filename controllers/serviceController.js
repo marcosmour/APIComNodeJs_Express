@@ -65,6 +65,31 @@ const serviceController = {
         } catch (error) {
             console.log(error)
         }
+    },
+    update: async(req, res) => {
+
+        const service = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            image: req.body.image
+        }
+
+        const id = req.params.id
+
+        try {
+            
+            const updatedService = await ServiceModel.findByIdAndUpdate(id, service)
+
+            if(!updatedService) {
+                return res.status(404).json({msg: "Serviço não encontrado!"})
+            }
+
+            res.status(200).json({service, msg: "Serviço atualizado com sucesso!"})
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 module.exports = serviceController;
