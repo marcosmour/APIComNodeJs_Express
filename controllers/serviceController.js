@@ -48,6 +48,23 @@ const serviceController = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    delete: async (req, res) => {
+        const id = req.params.id
+        try {
+            
+            const response = await ServiceModel.findByIdAndDelete(id)
+
+            if(!response) {
+                return res.status(404).json({msg: "Serviço não encontrado!"})
+            }
+
+            res.status(400).json({msg: "Serviço deletado com sucesso!"})
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 module.exports = serviceController;
