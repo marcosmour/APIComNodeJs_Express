@@ -18,6 +18,19 @@ const serviceController = {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    getAll: async(req, res) => {
+
+        try {
+            
+            const response = await ServiceModel.find()
+            res.json(response)
+
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 }
 module.exports = serviceController;
