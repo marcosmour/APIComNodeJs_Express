@@ -31,6 +31,23 @@ const serviceController = {
             console.log(error)
         }
         
+    },
+
+    get: async(req, res) => {
+
+        try {
+
+            const id = req.params.id
+            const response = await ServiceModel.findById(id)
+
+            if(!response) {
+                res.status(404).json({msg: "Serviço não encontrado!"})
+                return;
+            }
+            res.json(response)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 module.exports = serviceController;
